@@ -142,7 +142,9 @@ function setCurrency(currency, options = { persist: true }) {
   const valid = currency === "ils" ? "ils" : "usd";
 
   document.querySelectorAll(".currency-btn").forEach((btn) => {
-    btn.classList.toggle("active", btn.dataset.currency === valid);
+    const isActive = btn.dataset.currency === valid;
+    btn.classList.toggle("active", isActive);
+    btn.setAttribute("aria-pressed", isActive ? "true" : "false");
   });
 
   document.querySelectorAll("[data-price-key]").forEach((el) => {

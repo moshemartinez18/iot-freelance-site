@@ -43,20 +43,20 @@
     nodes = Array.from({ length: NODE_COUNT }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
+      vx: (Math.random() - 0.5) * 0.85,
+      vy: (Math.random() - 0.5) * 0.85,
       radius: 1.2 + Math.random() * 1.8,
       phase: Math.random() * Math.PI * 2,
     }));
   }
 
   function spawnPulse(a, b) {
-    if (pulses.length > 24) return;
+    if (pulses.length > 32) return;
     pulses.push({
       from: a,
       to: b,
       t: 0,
-      speed: 0.004 + Math.random() * 0.006,
+      speed: 0.012 + Math.random() * 0.014,
     });
   }
 
@@ -94,7 +94,7 @@
         ctx.lineTo(b.x, b.y);
         ctx.stroke();
 
-        if (Math.random() < 0.0008) spawnPulse(a, b);
+        if (Math.random() < 0.0025) spawnPulse(a, b);
       }
     }
 
@@ -117,7 +117,7 @@
 
   function drawNodes(time) {
     nodes.forEach((node) => {
-      const pulse = 0.65 + Math.sin(time * 0.002 + node.phase) * 0.35;
+      const pulse = 0.65 + Math.sin(time * 0.005 + node.phase) * 0.35;
       const r = node.radius * pulse;
 
       const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, r * 6);
@@ -157,7 +157,7 @@
   }
 
   function loop(time) {
-    if (time - lastTime > 32) {
+    if (time - lastTime > 16) {
       draw(time);
       lastTime = time;
     }

@@ -141,30 +141,44 @@ a:hover {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 2px;
+  padding: 3px;
+  gap: 2px;
 }
 
 .currency-btn {
-  font: inherit;
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 0.35rem 0.65rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  min-width: 2.85rem;
+  padding: 0.4rem 0.55rem;
   border: none;
   background: transparent;
   color: var(--text-muted);
   border-radius: 6px;
   cursor: pointer;
-  transition: color 0.15s, background 0.15s;
+  transition: color 0.2s, background 0.2s, opacity 0.2s, transform 0.2s, box-shadow 0.2s;
   white-space: nowrap;
+  opacity: 0.38;
 }
 
-.currency-btn:hover {
+.currency-btn:hover:not(.active) {
+  opacity: 0.62;
   color: var(--text);
 }
 
 .currency-btn.active {
-  background: var(--accent-dim);
-  color: var(--accent);
+  opacity: 1;
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 700;
+  box-shadow: 0 2px 12px var(--accent-glow);
+  transform: scale(1.02);
+}
+
+.currency-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .currency-switch-inline {
