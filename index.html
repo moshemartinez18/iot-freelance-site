@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="End-to-end IoT prototypes: hardware, firmware, and dashboards. From sensor to working system in weeks.">
+  <title>IoT Prototype Developer — Hardware + Firmware + Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+      <a href="#" class="logo">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text" data-i18n="brand">YourName IoT</span>
+      </a>
+      <div class="nav-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="es">ES</button>
+        </div>
+        <a href="#contact" class="btn btn-primary btn-sm" data-i18n="nav_cta">Book a call</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="hero_eyebrow">Industrial IoT · Full-stack hardware & software</p>
+          <h1 data-i18n="hero_title">Working IoT prototypes in weeks — not months</h1>
+          <p class="hero-lead" data-i18n="hero_lead">
+            I build complete systems: sensors, firmware, wireless connectivity, and dashboards.
+            One engineer from prototype to field-ready demo.
+          </p>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-primary" data-i18n="hero_cta_primary">Start a project</a>
+            <a href="#packages" class="btn btn-ghost" data-i18n="hero_cta_secondary">View packages</a>
+          </div>
+          <ul class="hero-tags" aria-label="Languages">
+            <li>EN</li>
+            <li>ES</li>
+            <li>HE</li>
+          </ul>
+        </div>
+        <div class="hero-card" aria-hidden="true">
+          <div class="signal-diagram">
+            <div class="node node-sensor">Sensor</div>
+            <div class="line line-1"></div>
+            <div class="node node-mcu">MCU</div>
+            <div class="line line-2"></div>
+            <div class="node node-cloud">Cloud</div>
+            <div class="line line-3"></div>
+            <div class="node node-ui">Dashboard</div>
+          </div>
+          <p class="diagram-caption" data-i18n="hero_diagram">Sensor → firmware → dashboard</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="services_title">What I build</h2>
+          <p data-i18n="services_sub">Practical systems for startups, makers, and small industrial teams.</p>
+        </div>
+        <div class="cards-grid three">
+          <article class="card">
+            <div class="card-icon">01</div>
+            <h3 data-i18n="service_1_title">IoT Prototype Sprint</h3>
+            <p data-i18n="service_1_desc">End-to-end prototype with sensors, embedded firmware, and a web dashboard with alerts.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">02</div>
+            <h3 data-i18n="service_2_title">Custom firmware</h3>
+            <p data-i18n="service_2_desc">ESP32, STM32, wireless stacks, battery optimization, and reliable field communication.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">03</div>
+            <h3 data-i18n="service_3_title">Technical audit</h3>
+            <p data-i18n="service_3_desc">Fast review of your hardware/software prototype with risks, fixes, and a clear next-step plan.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="packages">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="packages_title">Clear packages</h2>
+          <p data-i18n="packages_sub">Fixed scope. Fixed timeline. No endless scope creep.</p>
+        </div>
+        <div class="cards-grid two">
+          <article class="card card-featured">
+            <p class="package-label" data-i18n="package_1_label">Most popular</p>
+            <h3 data-i18n="package_1_title">IoT Prototype Sprint</h3>
+            <p class="price">$2,500 – $4,000</p>
+            <p class="package-time" data-i18n="package_1_time">2–3 weeks</p>
+            <ul class="check-list">
+              <li data-i18n="package_1_item_1">1–2 sensors + microcontroller</li>
+              <li data-i18n="package_1_item_2">Firmware + wireless connectivity</li>
+              <li data-i18n="package_1_item_3">Web dashboard + basic alerts</li>
+              <li data-i18n="package_1_item_4">Handoff documentation</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary btn-block" data-i18n="package_cta">Request quote</a>
+          </article>
+          <article class="card">
+            <p class="package-label muted" data-i18n="package_2_label">Fast start</p>
+            <h3 data-i18n="package_2_title">Technical Audit</h3>
+            <p class="price">$400 – $600</p>
+            <p class="package-time" data-i18n="package_2_time">3–5 days</p>
+            <ul class="check-list">
+              <li data-i18n="package_2_item_1">Architecture & firmware review</li>
+              <li data-i18n="package_2_item_2">Risk and reliability assessment</li>
+              <li data-i18n="package_2_item_3">Written report + 1h call</li>
+              <li data-i18n="package_2_item_4">Roadmap to production</li>
+            </ul>
+            <a href="#contact" class="btn btn-ghost btn-block" data-i18n="package_cta">Request quote</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="why_title">Why work with me</h2>
+        </div>
+        <div class="stats-grid">
+          <div class="stat">
+            <p class="stat-value" data-i18n="why_1_value">Full stack</p>
+            <p class="stat-label" data-i18n="why_1_label">Hardware, firmware & dashboard in one workflow</p>
+          </div>
+          <div class="stat">
+            <p class="stat-value" data-i18n="why_2_value">Industrial</p>
+            <p class="stat-label" data-i18n="why_2_label">Experience with real field systems, not just demos</p>
+          </div>
+          <div class="stat">
+            <p class="stat-value" data-i18n="why_3_value">3 languages</p>
+            <p class="stat-label" data-i18n="why_3_label">English, Spanish, and Hebrew for global teams</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <h2 data-i18n="contact_title">Let's build your prototype</h2>
+          <p data-i18n="contact_sub">Tell me what you need to measure, control, or monitor. I'll reply within 24 hours.</p>
+          <ul class="contact-links">
+            <li>
+              <span class="contact-label">Email</span>
+              <a href="mailto:you@example.com" id="email-link">you@example.com</a>
+            </li>
+            <li>
+              <span class="contact-label">WhatsApp</span>
+              <a href="https://wa.me/972500000000" id="whatsapp-link" target="_blank" rel="noopener noreferrer">+972 50-000-0000</a>
+            </li>
+            <li>
+              <span class="contact-label">LinkedIn</span>
+              <a href="https://linkedin.com/in/yourprofile" id="linkedin-link" target="_blank" rel="noopener noreferrer">linkedin.com/in/yourprofile</a>
+            </li>
+          </ul>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <label>
+            <span data-i18n="form_name">Name</span>
+            <input type="text" name="name" required autocomplete="name">
+          </label>
+          <label>
+            <span data-i18n="form_email">Email</span>
+            <input type="email" name="email" required autocomplete="email">
+          </label>
+          <label>
+            <span data-i18n="form_message">Project details</span>
+            <textarea name="message" rows="5" required data-i18n-placeholder="form_placeholder" placeholder="What do you want to build? Timeline? Budget range?"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary btn-block" data-i18n="form_submit">Send message</button>
+          <p class="form-note" data-i18n="form_note">This opens your email client with a pre-filled message. No backend required.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> <span data-i18n="brand">YourName IoT</span></p>
+      <p class="footer-note" data-i18n="footer_note">Based in Israel · Available for remote projects worldwide</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
