@@ -250,8 +250,8 @@ a:hover {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(61, 214, 198, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(61, 214, 198, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(56, 148, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 148, 255, 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
 }
@@ -260,8 +260,8 @@ a:hover {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 90% 80% at 20% 20%, rgba(61, 214, 198, 0.08), transparent 55%),
-    radial-gradient(ellipse 70% 60% at 85% 60%, rgba(61, 120, 214, 0.1), transparent 50%),
+    radial-gradient(ellipse 90% 80% at 20% 20%, rgba(56, 148, 255, 0.12), transparent 55%),
+    radial-gradient(ellipse 70% 60% at 85% 60%, rgba(80, 120, 255, 0.14), transparent 50%),
     linear-gradient(180deg, rgba(11, 15, 20, 0.3) 0%, rgba(11, 15, 20, 0.85) 75%, var(--bg) 100%);
 }
 

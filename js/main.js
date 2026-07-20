@@ -138,7 +138,7 @@ function formatPriceRange(usdMin, usdMax, currency) {
   return `${formatUsd(usdMin)} – ${formatUsd(usdMax)}`;
 }
 
-function setCurrency(currency) {
+function setCurrency(currency, options = { persist: true }) {
   const valid = currency === "ils" ? "ils" : "usd";
 
   document.querySelectorAll(".currency-btn").forEach((btn) => {
@@ -151,7 +151,34 @@ function setCurrency(currency) {
     el.textContent = formatPriceRange(range.usdMin, range.usdMax, valid);
   });
 
-  localStorage.setItem("site-currency", valid);
+  if (options.persist) {
+    localStorage.setItem("site-currency", valid);
+  }
+}
+
+async function detectDefaultCurrency() {
+  const saved = localStorage.getItem("site-currency");
+  if (saved) return saved;
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 3500);
+    const response = await fetch("https://ipapi.co/json/", {
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+    if (!response.ok) throw new Error("geo lookup failed");
+
+    const data = await response.json();
+    return data.country_code === "IL" ? "ils" : "usd";
+  } catch {
+    return "usd";
+  }
+}
+
+async function initCurrency() {
+  const currency = await detectDefaultCurrency();
+  setCurrency(currency, { persist: false });
 }
 
 function applyConfig() {
@@ -183,8 +210,6 @@ function applyConfig() {
     liLink.href = cfg.linkedin;
     liLink.textContent = cfg.linkedin.replace(/^https?:\/\//, "");
   }
-
-  setCurrency(localStorage.getItem("site-currency") || "usd");
 }
 
 function setLanguage(lang) {
@@ -230,13 +255,14 @@ function initForm() {
 document.addEventListener("DOMContentLoaded", () => {
   applyConfig();
   setLanguage(localStorage.getItem("site-lang") || "en");
+  initCurrency();
 
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
   });
 
   document.querySelectorAll(".currency-btn").forEach((btn) => {
-    btn.addEventListener("click", () => setCurrency(btn.dataset.currency));
+    btn.addEventListener("click", () => setCurrency(btn.dataset.currency, { persist: true }));
   });
 
   const year = document.getElementById("year");

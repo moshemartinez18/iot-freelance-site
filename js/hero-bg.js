@@ -15,12 +15,13 @@
 
   const NODE_COUNT = 48;
   const MAX_DISTANCE = 140;
+  const RGB = { r: 56, g: 148, b: 255 };
   const COLORS = {
-    node: "rgba(61, 214, 198, 0.9)",
-    nodeGlow: "rgba(61, 214, 198, 0.35)",
-    line: "rgba(61, 214, 198, 0.12)",
-    pulse: "rgba(61, 214, 198, 0.85)",
-    grid: "rgba(61, 120, 214, 0.06)",
+    node: `rgba(${RGB.r}, ${RGB.g}, ${RGB.b}, 0.92)`,
+    nodeGlow: `rgba(${RGB.r}, ${RGB.g}, ${RGB.b}, 0.38)`,
+    pulse: `rgba(120, 185, 255, 0.9)`,
+    grid: `rgba(40, 100, 200, 0.08)`,
+    fade: `rgba(${RGB.r}, ${RGB.g}, ${RGB.b}, 0)`,
   };
 
   function resize() {
@@ -86,7 +87,7 @@
         if (dist > MAX_DISTANCE) continue;
 
         const alpha = (1 - dist / MAX_DISTANCE) * 0.55;
-        ctx.strokeStyle = `rgba(61, 214, 198, ${alpha * 0.18})`;
+        ctx.strokeStyle = `rgba(${RGB.r}, ${RGB.g}, ${RGB.b}, ${alpha * 0.2})`;
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(a.x, a.y);
@@ -105,7 +106,7 @@
       const y = pulse.from.y + (pulse.to.y - pulse.from.y) * pulse.t;
       const glow = ctx.createRadialGradient(x, y, 0, x, y, 8);
       glow.addColorStop(0, COLORS.pulse);
-      glow.addColorStop(1, "rgba(61, 214, 198, 0)");
+      glow.addColorStop(1, COLORS.fade);
       ctx.fillStyle = glow;
       ctx.beginPath();
       ctx.arc(x, y, 3, 0, Math.PI * 2);
@@ -121,7 +122,7 @@
 
       const glow = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, r * 6);
       glow.addColorStop(0, COLORS.nodeGlow);
-      glow.addColorStop(1, "rgba(61, 214, 198, 0)");
+      glow.addColorStop(1, COLORS.fade);
       ctx.fillStyle = glow;
       ctx.beginPath();
       ctx.arc(node.x, node.y, r * 6, 0, Math.PI * 2);
