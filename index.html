@@ -18,6 +18,10 @@
         <span class="logo-text" data-i18n="brand">YourName IoT</span>
       </a>
       <div class="nav-actions">
+        <div class="currency-switch" role="group" aria-label="Currency">
+          <button type="button" class="currency-btn active" data-currency="usd">USD</button>
+          <button type="button" class="currency-btn" data-currency="ils">₪</button>
+        </div>
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" class="lang-btn active" data-lang="en">EN</button>
           <button type="button" class="lang-btn" data-lang="es">ES</button>
@@ -29,7 +33,12 @@
 
   <main>
     <section class="hero">
-      <div class="container hero-grid">
+      <div class="hero-bg" aria-hidden="true">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-bg-grid"></div>
+        <div class="hero-bg-overlay"></div>
+      </div>
+      <div class="container hero-grid hero-content">
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero_eyebrow">Industrial IoT · Full-stack hardware & software</p>
           <h1 data-i18n="hero_title">Working IoT prototypes in weeks — not months</h1>
@@ -90,15 +99,21 @@
 
     <section class="section section-alt" id="packages">
       <div class="container">
-        <div class="section-head">
-          <h2 data-i18n="packages_title">Clear packages</h2>
-          <p data-i18n="packages_sub">Fixed scope. Fixed timeline. No endless scope creep.</p>
+        <div class="section-head section-head-row">
+          <div>
+            <h2 data-i18n="packages_title">Clear packages</h2>
+            <p data-i18n="packages_sub">Fixed scope. Fixed timeline. No endless scope creep.</p>
+          </div>
+          <div class="currency-switch currency-switch-inline" role="group" aria-label="Currency">
+            <button type="button" class="currency-btn active" data-currency="usd">USD</button>
+            <button type="button" class="currency-btn" data-currency="ils">₪ ILS</button>
+          </div>
         </div>
         <div class="cards-grid two">
           <article class="card card-featured">
             <p class="package-label" data-i18n="package_1_label">Most popular</p>
             <h3 data-i18n="package_1_title">IoT Prototype Sprint</h3>
-            <p class="price">$2,500 – $4,000</p>
+            <p class="price" data-price-key="sprint">$2,500 – $4,000</p>
             <p class="package-time" data-i18n="package_1_time">2–3 weeks</p>
             <ul class="check-list">
               <li data-i18n="package_1_item_1">1–2 sensors + microcontroller</li>
@@ -111,7 +126,7 @@
           <article class="card">
             <p class="package-label muted" data-i18n="package_2_label">Fast start</p>
             <h3 data-i18n="package_2_title">Technical Audit</h3>
-            <p class="price">$400 – $600</p>
+            <p class="price" data-price-key="audit">$400 – $600</p>
             <p class="package-time" data-i18n="package_2_time">3–5 days</p>
             <ul class="check-list">
               <li data-i18n="package_2_item_1">Architecture & firmware review</li>
@@ -195,6 +210,7 @@
   </footer>
 
   <script src="js/config.js"></script>
+  <script src="js/hero-bg.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

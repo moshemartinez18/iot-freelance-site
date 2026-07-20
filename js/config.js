@@ -5,4 +5,9 @@ window.SITE_CONFIG = {
   whatsapp: "972557708310", // digits only, no + or spaces
   whatsappDisplay: "+972 55-770-8310",
   linkedin: "https://www.linkedin.com/in/moshe-martinez/",
+  usdToIls: 3.65,
+  prices: {
+    sprint: { usdMin: 2500, usdMax: 4000 },
+    audit: { usdMin: 400, usdMax: 600 },
+  },
 };

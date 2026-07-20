@@ -54,6 +54,7 @@ const translations = {
     form_submit: "Send message",
     form_note: "This opens your email client with a pre-filled message. No backend required.",
     footer_note: "Based in Israel · Available for remote projects worldwide",
+    currency_note: "Prices shown in {currency}",
   },
   es: {
     brand: "YourName IoT",
@@ -110,8 +111,48 @@ const translations = {
     form_submit: "Enviar mensaje",
     form_note: "Esto abre tu cliente de email con el mensaje prellenado. Sin backend.",
     footer_note: "Basado en Israel · Disponible para proyectos remotos en todo el mundo",
+    currency_note: "Precios mostrados en {currency}",
   },
 };
+
+function formatUsd(amount) {
+  return `$${amount.toLocaleString("en-US")}`;
+}
+
+function formatIls(amount) {
+  const rounded = Math.round(amount / 50) * 50;
+  return `₪${rounded.toLocaleString("en-US")}`;
+}
+
+function getPriceRange(key) {
+  const cfg = window.SITE_CONFIG?.prices?.[key];
+  if (!cfg) return null;
+  return { usdMin: cfg.usdMin, usdMax: cfg.usdMax };
+}
+
+function formatPriceRange(usdMin, usdMax, currency) {
+  const rate = window.SITE_CONFIG?.usdToIls || 3.65;
+  if (currency === "ils") {
+    return `${formatIls(usdMin * rate)} – ${formatIls(usdMax * rate)}`;
+  }
+  return `${formatUsd(usdMin)} – ${formatUsd(usdMax)}`;
+}
+
+function setCurrency(currency) {
+  const valid = currency === "ils" ? "ils" : "usd";
+
+  document.querySelectorAll(".currency-btn").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.currency === valid);
+  });
+
+  document.querySelectorAll("[data-price-key]").forEach((el) => {
+    const range = getPriceRange(el.dataset.priceKey);
+    if (!range) return;
+    el.textContent = formatPriceRange(range.usdMin, range.usdMax, valid);
+  });
+
+  localStorage.setItem("site-currency", valid);
+}
 
 function applyConfig() {
   const cfg = window.SITE_CONFIG;
@@ -142,6 +183,8 @@ function applyConfig() {
     liLink.href = cfg.linkedin;
     liLink.textContent = cfg.linkedin.replace(/^https?:\/\//, "");
   }
+
+  setCurrency(localStorage.getItem("site-currency") || "usd");
 }
 
 function setLanguage(lang) {
@@ -190,6 +233,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll(".lang-btn").forEach((btn) => {
     btn.addEventListener("click", () => setLanguage(btn.dataset.lang));
+  });
+
+  document.querySelectorAll(".currency-btn").forEach((btn) => {
+    btn.addEventListener("click", () => setCurrency(btn.dataset.currency));
   });
 
   const year = document.getElementById("year");

@@ -136,6 +136,41 @@ a:hover {
   color: var(--accent);
 }
 
+.currency-switch {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.currency-btn {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.65rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+
+.currency-btn:hover {
+  color: var(--text);
+}
+
+.currency-btn.active {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+.currency-switch-inline {
+  flex-shrink: 0;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -188,7 +223,51 @@ a:hover {
 }
 
 .hero {
-  padding: 4rem 0 5rem;
+  position: relative;
+  padding: 5rem 0 6rem;
+  overflow: hidden;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100dvh - var(--header-h));
+  display: flex;
+  align-items: center;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(61, 214, 198, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(61, 214, 198, 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 20%, transparent 75%);
+}
+
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 90% 80% at 20% 20%, rgba(61, 214, 198, 0.08), transparent 55%),
+    radial-gradient(ellipse 70% 60% at 85% 60%, rgba(61, 120, 214, 0.1), transparent 50%),
+    linear-gradient(180deg, rgba(11, 15, 20, 0.3) 0%, rgba(11, 15, 20, 0.85) 75%, var(--bg) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-grid {
@@ -248,7 +327,8 @@ a:hover {
 }
 
 .hero-card {
-  background: var(--surface);
+  background: rgba(21, 29, 39, 0.75);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 2rem;
@@ -327,6 +407,18 @@ a:hover {
   color: var(--text-muted);
   margin: 0;
   font-size: 1.05rem;
+}
+
+.section-head-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: none;
+}
+
+.section-head-row > div {
+  max-width: 36rem;
 }
 
 .cards-grid {
@@ -568,6 +660,12 @@ a:hover {
 
   .hero {
     padding-top: 2rem;
+    min-height: auto;
+  }
+
+  .section-head-row {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .signal-diagram {
@@ -588,5 +686,25 @@ a:hover {
 @media (max-width: 600px) {
   .nav-actions .btn-sm {
     display: none;
+  }
+
+  .nav-actions {
+    gap: 0.5rem;
+  }
+
+  .currency-switch:not(.currency-switch-inline) .currency-btn {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-grid {
+    opacity: 0.6;
+  }
+
+  .line {
+    animation: none;
+    opacity: 0.6;
   }
 }
