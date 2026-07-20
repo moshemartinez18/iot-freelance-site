@@ -239,13 +239,89 @@ function initForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;
 
+  const startedAt = Date.now();
+  let interacted = false;
+
+  const markInteracted = () => {
+    interacted = true;
+  };
+
+  // Simple client-side signals to reduce spam from ultra-fast bots.
+  document.addEventListener("click", markInteracted, { passive: true, once: true });
+  document.addEventListener("scroll", markInteracted, { passive: true, once: true });
+  document.addEventListener("mousemove", markInteracted, { passive: true, once: true });
+  document.addEventListener("touchstart", markInteracted, { passive: true, once: true });
+
+  const statusEl = document.getElementById("form-status");
+  const showError = (msg) => {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+    statusEl.classList.add("error");
+  };
+  const clearError = () => {
+    if (!statusEl) return;
+    statusEl.classList.remove("error");
+  };
+
+  const RATE_LIMIT_MS = 30_000; // avoid multiple rapid submits
+  const MIN_INTERACTION_MS = 3_000; // allow submit even without interaction after a short delay
+  const HONEY_FIELD = "company";
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    clearError();
+
     const data = new FormData(form);
     const name = data.get("name");
     const email = data.get("email");
     const message = data.get("message");
+    const honey = (data.get(HONEY_FIELD) || "").toString().trim();
     const to = window.SITE_CONFIG?.email || "you@example.com";
+
+    // Honeypot: if it is filled, it's almost certainly a bot.
+    if (honey.length > 0) {
+      showError(
+        document.documentElement.lang === "es"
+          ? "Tu envío fue bloqueado por anti-spam."
+          : "Your submission was blocked by anti-spam."
+      );
+      return;
+    }
+
+    const now = Date.now();
+    const last = Number(localStorage.getItem("contact-last-submit-at") || 0);
+    if (last && now - last < RATE_LIMIT_MS) {
+      showError(
+        document.documentElement.lang === "es"
+          ? "Espera unos segundos y vuelve a intentarlo."
+          : "Please wait a moment and try again."
+      );
+      return;
+    }
+
+    // Basic sanity check: message should be reasonably long.
+    const trimmedMsg = (message || "").toString().trim();
+    if (trimmedMsg.length < 10) {
+      showError(
+        document.documentElement.lang === "es"
+          ? "Agrega un poco más de detalle del proyecto."
+          : "Please add a bit more project detail."
+      );
+      return;
+    }
+
+    // Require either human interaction OR a short time delay.
+    if (!interacted && now - startedAt < MIN_INTERACTION_MS) {
+      showError(
+        document.documentElement.lang === "es"
+          ? "Por favor interactúa con la página y luego envía."
+          : "Please interact with the page and then submit."
+      );
+      return;
+    }
+
+    localStorage.setItem("contact-last-submit-at", String(now));
+
     const subject = encodeURIComponent(`IoT project inquiry from ${name}`);
     const body = encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\n${message}`

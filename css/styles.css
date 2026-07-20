@@ -644,6 +644,10 @@ a:hover {
   margin: 1rem 0 0;
 }
 
+.form-note.error {
+  color: var(--warning);
+}
+
 .footer {
   padding: 2rem 0;
   border-top: 1px solid var(--border);

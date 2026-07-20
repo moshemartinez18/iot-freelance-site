@@ -195,8 +195,18 @@
             <span data-i18n="form_message">Project details</span>
             <textarea name="message" rows="5" required data-i18n-placeholder="form_placeholder" placeholder="What do you want to build? Timeline? Budget range?"></textarea>
           </label>
+          <!-- Anti-spam honeypot: los bots suelen rellenarlo; los humanos no. -->
+          <input
+            type="text"
+            name="company"
+            class="honeypot"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+            style="display:none"
+          >
           <button type="submit" class="btn btn-primary btn-block" data-i18n="form_submit">Send message</button>
-          <p class="form-note" data-i18n="form_note">This opens your email client with a pre-filled message. No backend required.</p>
+          <p class="form-note" id="form-status" data-i18n="form_note">This opens your email client with a pre-filled message. No backend required.</p>
         </form>
       </div>
     </section>
